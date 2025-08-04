@@ -1,10 +1,11 @@
 import { useState } from "react";
-import { Shield, Menu, X, Home, User, Settings, HelpCircle } from "lucide-react";
+import { Shield, Menu, X, Home, User, Settings, HelpCircle, LogOut } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import HerShieldLogo from "./HerShieldLogo";
 import LanguageSelector from "./LanguageSelector";
 import { Link, useLocation } from "react-router-dom";
+import { useAuth } from "@/hooks/useAuth";
 
 interface NavigationProps {
   showAuthButtons?: boolean;
@@ -13,6 +14,7 @@ interface NavigationProps {
 const Navigation = ({ showAuthButtons = true }: NavigationProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
+  const { user, signOut } = useAuth();
   
   const isActive = (path: string) => location.pathname === path;
   
@@ -57,10 +59,31 @@ const Navigation = ({ showAuthButtons = true }: NavigationProps) => {
             
             {showAuthButtons && (
               <div className="hidden md:flex items-center gap-2">
-                <Button variant="ghost" size="sm">Sign In</Button>
-                <Link to="/dashboard">
-                  <Button variant="hero" size="sm">Get Started</Button>
-                </Link>
+                {user ? (
+                  <>
+                    <span className="text-sm text-muted-foreground mr-2">
+                      {user.email}
+                    </span>
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      onClick={signOut}
+                      className="flex items-center gap-2"
+                    >
+                      <LogOut className="h-4 w-4" />
+                      Sign Out
+                    </Button>
+                  </>
+                ) : (
+                  <>
+                    <Link to="/auth">
+                      <Button variant="ghost" size="sm">Sign In</Button>
+                    </Link>
+                    <Link to="/dashboard">
+                      <Button variant="hero" size="sm">Get Started</Button>
+                    </Link>
+                  </>
+                )}
               </div>
             )}
 
@@ -96,16 +119,39 @@ const Navigation = ({ showAuthButtons = true }: NavigationProps) => {
 
                   {showAuthButtons && (
                     <div className="flex flex-col gap-2 pt-4 border-t">
-                      <Button variant="ghost" className="justify-start">
-                        <User className="h-4 w-4 mr-2" />
-                        Sign In
-                      </Button>
-                      <Link to="/dashboard" onClick={() => setIsOpen(false)}>
-                        <Button variant="hero" className="w-full justify-start">
-                          <Shield className="h-4 w-4 mr-2" />
-                          Get Started
-                        </Button>
-                      </Link>
+                      {user ? (
+                        <>
+                          <div className="text-sm text-muted-foreground px-3 py-2">
+                            {user.email}
+                          </div>
+                          <Button
+                            variant="ghost"
+                            className="justify-start"
+                            onClick={() => {
+                              signOut();
+                              setIsOpen(false);
+                            }}
+                          >
+                            <LogOut className="h-4 w-4 mr-2" />
+                            Sign Out
+                          </Button>
+                        </>
+                      ) : (
+                        <>
+                          <Link to="/auth" onClick={() => setIsOpen(false)}>
+                            <Button variant="ghost" className="w-full justify-start">
+                              <User className="h-4 w-4 mr-2" />
+                              Sign In
+                            </Button>
+                          </Link>
+                          <Link to="/dashboard" onClick={() => setIsOpen(false)}>
+                            <Button variant="hero" className="w-full justify-start">
+                              <Shield className="h-4 w-4 mr-2" />
+                              Get Started
+                            </Button>
+                          </Link>
+                        </>
+                      )}
                     </div>
                   )}
                 </div>
