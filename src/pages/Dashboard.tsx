@@ -1,8 +1,8 @@
-import { Shield, Users, AlertTriangle, BookOpen, Settings, Phone } from "lucide-react";
+import { AlertTriangle, BookOpen, Shield } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import HerShieldLogo from "@/components/HerShieldLogo";
-import LanguageSelector from "@/components/LanguageSelector";
+import Navigation from "@/components/Navigation";
+import Breadcrumbs from "@/components/Breadcrumbs";
+import QuickActions from "@/components/QuickActions";
 import SafetyTipCard from "@/components/SafetyTipCard";
 import EmergencyButton from "@/components/EmergencyButton";
 import QuickReportButton from "@/components/QuickReportButton";
@@ -46,80 +46,27 @@ const Dashboard = () => {
 
   return (
     <div className="min-h-screen bg-gradient-hero">
-      {/* Navigation */}
-      <nav className="sticky top-0 z-40 border-b border-border/40 bg-background/80 backdrop-blur-sm">
-        <div className="container mx-auto px-4 py-3">
-          <div className="flex items-center justify-between">
-            <HerShieldLogo size="md" />
-            <div className="flex items-center gap-4">
-              <LanguageSelector />
-              <Button variant="ghost" size="icon">
-                <Settings className="h-4 w-4" />
-              </Button>
-            </div>
-          </div>
-        </div>
-      </nav>
+      <Navigation showAuthButtons={false} />
 
       {/* Main Content */}
-      <main className="container mx-auto px-4 py-8">
+      <main className="container mx-auto px-4 py-6">
+        <Breadcrumbs />
+        
         {/* Welcome Section */}
-        <div className="mb-8 text-center">
+        <div className="mb-8">
           <h1 className="text-3xl font-bold text-foreground mb-2">
             Welcome to Your Safe Space
           </h1>
-          <p className="text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-muted-foreground max-w-3xl">
             HerShield is designed to protect and empower women online. Access safety tools, 
             privacy controls, and emergency features all in one secure platform.
           </p>
         </div>
 
         {/* Quick Actions */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-          <Card className="bg-card/50 border-primary/20 hover:shadow-card transition-all">
-            <CardHeader className="text-center">
-              <Shield className="h-8 w-8 text-primary mx-auto mb-2" />
-              <CardTitle>Privacy Dashboard</CardTitle>
-              <CardDescription>
-                Customize your privacy settings and data visibility
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <Button variant="hero" className="w-full">
-                Manage Privacy
-              </Button>
-            </CardContent>
-          </Card>
-
-          <Card className="bg-card/50 border-success/20 hover:shadow-card transition-all">
-            <CardHeader className="text-center">
-              <Users className="h-8 w-8 text-success mx-auto mb-2" />
-              <CardTitle>Trusted Contacts</CardTitle>
-              <CardDescription>
-                Manage your emergency contacts and trusted network
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <Button variant="safe" className="w-full">
-                Manage Contacts
-              </Button>
-            </CardContent>
-          </Card>
-
-          <Card className="bg-card/50 border-warning/20 hover:shadow-card transition-all">
-            <CardHeader className="text-center">
-              <Phone className="h-8 w-8 text-warning mx-auto mb-2" />
-              <CardTitle>Emergency Resources</CardTitle>
-              <CardDescription>
-                Quick access to emergency services and helplines
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <Button variant="report" className="w-full">
-                View Resources
-              </Button>
-            </CardContent>
-          </Card>
+        <div className="mb-8">
+          <h2 className="text-xl font-semibold mb-4">Quick Actions</h2>
+          <QuickActions />
         </div>
 
         {/* Safety Tips */}

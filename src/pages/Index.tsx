@@ -1,8 +1,8 @@
 import { Shield, Heart, Users, Lock, ArrowRight, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import Navigation from "@/components/Navigation";
 import HerShieldLogo from "@/components/HerShieldLogo";
-import LanguageSelector from "@/components/LanguageSelector";
 import { Link } from "react-router-dom";
 import heroBackground from "@/assets/hero-background.jpg";
 
@@ -47,19 +47,7 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-gradient-hero">
-      {/* Navigation */}
-      <nav className="sticky top-0 z-50 border-b border-border/40 bg-background/80 backdrop-blur-sm">
-        <div className="container mx-auto px-4 py-4">
-          <div className="flex items-center justify-between">
-            <HerShieldLogo size="md" />
-            <div className="flex items-center gap-4">
-              <LanguageSelector />
-              <Button variant="ghost">Sign In</Button>
-              <Button variant="hero">Get Started</Button>
-            </div>
-          </div>
-        </div>
-      </nav>
+      <Navigation />
 
       {/* Hero Section */}
       <section className="relative py-20 px-4 overflow-hidden">
