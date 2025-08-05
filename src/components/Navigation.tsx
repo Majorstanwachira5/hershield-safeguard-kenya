@@ -21,6 +21,7 @@ const Navigation = ({ showAuthButtons = true }: NavigationProps) => {
   const navItems = [
     { label: "Home", path: "/", icon: Home },
     { label: "Dashboard", path: "/dashboard", icon: Shield },
+    { label: "Safety Center", path: "/safety", icon: Shield },
     { label: "Help", path: "/help", icon: HelpCircle },
   ];
 

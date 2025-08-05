@@ -21,6 +21,7 @@ const Breadcrumbs = () => {
     // Map paths to friendly labels
     const labelMap: Record<string, string> = {
       "/dashboard": "Dashboard",
+      "/safety": "Safety Center",
       "/help": "Help & Support",
       "/privacy": "Privacy Settings",
       "/contacts": "Trusted Contacts",
