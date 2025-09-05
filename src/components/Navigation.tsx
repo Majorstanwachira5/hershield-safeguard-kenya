@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Shield, Menu, X, Home, User, Settings, HelpCircle, LogOut } from "lucide-react";
+import { Shield, Menu, X, Home, User, Settings, HelpCircle, LogOut, Brain } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import HerShieldLogo from "./HerShieldLogo";
@@ -22,6 +22,7 @@ const Navigation = ({ showAuthButtons = true }: NavigationProps) => {
     { label: "Home", path: "/", icon: Home },
     { label: "Dashboard", path: "/dashboard", icon: Shield },
     { label: "Safety Center", path: "/safety", icon: Shield },
+    { label: "AI Safety Hub", path: "/ai", icon: Brain },
     { label: "Help", path: "/help", icon: HelpCircle },
   ];
 
