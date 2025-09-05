@@ -3,15 +3,17 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { supabase } from "@/lib/supabase";
+import { useAuth } from "@/hooks/useAuth";
 import { useToast } from "@/hooks/use-toast";
+import { useNavigate } from "react-router-dom";
 
 export const SignUpForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [loading, setLoading] = useState(false);
+  const { signUp, loading } = useAuth();
   const { toast } = useToast();
+  const navigate = useNavigate();
 
   const handleSignUp = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -25,29 +27,20 @@ export const SignUpForm = () => {
       return;
     }
 
-    setLoading(true);
-
-    const { error } = await supabase.auth.signUp({
-      email,
-      password,
-    });
-
-    if (error) {
+    try {
+      await signUp(email, password);
+      toast({
+        title: "Welcome to HerShield!",
+        description: "Your account has been created successfully.",
+      });
+      navigate("/dashboard");
+    } catch (error) {
       toast({
         title: "Error",
-        description: error.message,
+        description: "Failed to create account. Please try again.",
         variant: "destructive",
       });
-    } else {
-      toast({
-        title: "Account Created!",
-        description: "Please check your email to verify your account.",
-      });
-      setEmail("");
-      setPassword("");
-      setConfirmPassword("");
     }
-    setLoading(false);
   };
 
   return (
