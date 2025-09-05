@@ -9,6 +9,10 @@ import Dashboard from "./pages/Dashboard";
 import Auth from "./pages/Auth";
 import Safety from "./pages/Safety";
 import AI from "./pages/AI";
+import Community from "./pages/Community";
+import Resources from "./pages/Resources";
+import Profile from "./pages/Profile";
+import ReportIncident from "./pages/ReportIncident";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -26,6 +30,10 @@ const App = () => (
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/safety" element={<Safety />} />
             <Route path="/ai" element={<AI />} />
+            <Route path="/community" element={<Community />} />
+            <Route path="/resources" element={<Resources />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/report" element={<ReportIncident />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
