@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
-import HerShieldLogo from "./HerShieldLogo";
+import FeminineLogo from "./ui/FeminineLogo";
 import LanguageSelector from "./LanguageSelector";
 import { Link, useLocation } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
@@ -33,12 +33,12 @@ const Navigation = ({ showAuthButtons = true }: NavigationProps) => {
     <Link
       to={item.path}
       onClick={() => setIsOpen(false)}
-      className={`flex items-center gap-2 px-3 py-2 rounded-lg transition-colors relative ${
+      className={`flex items-center gap-2 px-3 py-2 rounded-lg transition-feminine relative hover-lift ${
         isActive(item.path)
-          ? "bg-primary text-primary-foreground"
+          ? "bg-gradient-navy-pink text-primary-foreground shadow-feminine"
           : item.highlight
-          ? "text-red-600 hover:text-red-700 hover:bg-red-50 dark:text-red-400 dark:hover:bg-red-950"
-          : "text-muted-foreground hover:text-foreground hover:bg-accent"
+          ? "text-red-600 hover:text-red-700 hover:bg-red-50 dark:text-red-400 dark:hover:bg-red-950 pulse-glow"
+          : "text-muted-foreground hover:text-foreground hover:bg-gradient-pink-yellow hover:text-white"
       } ${mobile ? "w-full justify-start" : ""}`}
     >
       <item.icon className={`h-4 w-4 ${item.highlight ? 'animate-pulse' : ''}`} />
@@ -52,11 +52,11 @@ const Navigation = ({ showAuthButtons = true }: NavigationProps) => {
   );
 
   return (
-    <nav className="sticky top-0 z-50 border-b border-border/40 bg-background/80 backdrop-blur-sm">
+    <nav className="sticky top-0 z-50 border-b border-border/40 bg-background/80 backdrop-blur-sm shadow-feminine">
       <div className="container mx-auto px-4 py-3">
         <div className="flex items-center justify-between">
-          <Link to="/">
-            <HerShieldLogo size="md" />
+          <Link to="/" className="hover-lift">
+            <FeminineLogo size="medium" showText={true} />
           </Link>
 
           {/* Desktop Navigation */}
@@ -74,12 +74,12 @@ const Navigation = ({ showAuthButtons = true }: NavigationProps) => {
                 {user ? (
                   <>
                     <Link to="/profile">
-                      <Button variant="ghost" size="sm" className="flex items-center gap-2">
-                        <Avatar className="w-6 h-6">
+                      <Button variant="ghost" size="sm" className="flex items-center gap-2 hover-lift">
+                        <Avatar className="w-6 h-6 ring-2 ring-secondary/20">
                           <AvatarImage src="https://images.unsplash.com/photo-1494790108755-2616b612b786?w=50" />
-                          <AvatarFallback className="text-xs">SM</AvatarFallback>
+                          <AvatarFallback className="text-xs bg-gradient-feminine text-white">SM</AvatarFallback>
                         </Avatar>
-                        <span className="text-sm">{user.email?.split('@')[0]}</span>
+                        <span className="text-sm font-medium">{user.email?.split('@')[0]}</span>
                       </Button>
                     </Link>
                     <Button
@@ -98,7 +98,7 @@ const Navigation = ({ showAuthButtons = true }: NavigationProps) => {
                       <Button variant="ghost" size="sm">Sign In</Button>
                     </Link>
                     <Link to="/dashboard">
-                      <Button variant="hero" size="sm">Get Started</Button>
+                      <Button variant="hero" size="sm" className="bg-gradient-feminine hover-lift shadow-glow">Get Started</Button>
                     </Link>
                   </>
                 )}
@@ -119,11 +119,12 @@ const Navigation = ({ showAuthButtons = true }: NavigationProps) => {
               <SheetContent side="right" className="w-72">
                 <div className="flex flex-col gap-4 pt-8">
                   <div className="flex items-center justify-between mb-4">
-                    <HerShieldLogo size="sm" />
+                    <FeminineLogo size="small" showText={true} />
                     <Button
                       variant="ghost"
                       size="icon"
                       onClick={() => setIsOpen(false)}
+                      className="hover-lift"
                     >
                       <X className="h-4 w-4" />
                     </Button>
@@ -163,7 +164,7 @@ const Navigation = ({ showAuthButtons = true }: NavigationProps) => {
                             </Button>
                           </Link>
                           <Link to="/dashboard" onClick={() => setIsOpen(false)}>
-                            <Button variant="hero" className="w-full justify-start">
+                            <Button variant="hero" className="w-full justify-start bg-gradient-feminine hover-lift">
                               <Shield className="h-4 w-4 mr-2" />
                               Get Started
                             </Button>

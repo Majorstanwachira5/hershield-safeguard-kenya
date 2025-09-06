@@ -19,15 +19,20 @@ const HerShieldLogo = ({ size = "md", showText = true }: HerShieldLogoProps) => 
   };
 
   return (
-    <div className="flex items-center gap-2">
+    <div className="flex items-center gap-3">
       <div className="relative">
-        <Shield className={`${iconSizes[size]} text-primary drop-shadow-sm`} />
-        <div className="absolute inset-0 bg-gradient-primary rounded-full opacity-20 blur-sm"></div>
+        <Shield className={`${iconSizes[size]} text-primary drop-shadow-sm float`} />
+        <div className="absolute inset-0 bg-gradient-feminine rounded-full opacity-30 blur-sm pulse-glow"></div>
       </div>
       {showText && (
-        <span className={`${textSizes[size]} font-bold bg-gradient-primary bg-clip-text text-transparent`}>
-          HerShield
-        </span>
+        <div className="flex flex-col">
+          <span className={`${textSizes[size]} font-bold bg-gradient-navy-pink bg-clip-text text-transparent`}>
+            HerShield
+          </span>
+          <span className="text-xs text-secondary/80 font-medium tracking-wider">
+            SAFEGUARD KENYA
+          </span>
+        </div>
       )}
     </div>
   );

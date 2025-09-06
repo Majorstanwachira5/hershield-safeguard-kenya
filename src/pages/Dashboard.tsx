@@ -135,7 +135,7 @@ const Dashboard = () => {
           {/* Welcome Section */}
           <div className="mb-8">
             <motion.h1 
-              className="text-3xl font-bold text-foreground mb-2"
+              className="text-3xl font-bold bg-gradient-navy-pink bg-clip-text text-transparent mb-2 float"
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.2 }}
@@ -155,7 +155,7 @@ const Dashboard = () => {
 
           {/* Stats Overview */}
           <div className="mb-8">
-            <h2 className="text-xl font-semibold mb-4">Safety Overview</h2>
+            <h2 className="text-xl font-semibold mb-4 bg-gradient-feminine bg-clip-text text-transparent">Safety Overview</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               {stats.map((stat, index) => (
                 <motion.div
@@ -164,7 +164,7 @@ const Dashboard = () => {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: index * 0.1 + 0.4 }}
                 >
-                  <Card className="hover:shadow-lg transition-all duration-300 cursor-pointer group">
+                  <Card className="hover:shadow-feminine transition-feminine cursor-pointer group hover-lift bg-gradient-to-br from-card to-card/50">
                     <CardContent className="p-6">
                       <div className="flex items-center justify-between">
                         <div>
@@ -176,8 +176,8 @@ const Dashboard = () => {
                             {stat.change}
                           </p>
                         </div>
-                        <div className={`p-3 rounded-lg ${stat.bg} group-hover:scale-110 transition-transform`}>
-                          <stat.icon className={`h-6 w-6 ${stat.color}`} />
+                        <div className={`p-3 rounded-lg bg-gradient-feminine group-hover:scale-110 transition-feminine shadow-glow`}>
+                          <stat.icon className={`h-6 w-6 text-white`} />
                         </div>
                       </div>
                       {stat.title === "Safety Score" && (
@@ -202,7 +202,7 @@ const Dashboard = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.6 }}
           >
-            <h2 className="text-xl font-semibold mb-4">Quick Actions</h2>
+            <h2 className="text-xl font-semibold mb-4 bg-gradient-feminine bg-clip-text text-transparent">Quick Actions</h2>
             <QuickActions />
           </motion.div>
 
@@ -215,10 +215,10 @@ const Dashboard = () => {
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.7 }}
             >
-              <Card className="h-fit">
+              <Card className="h-fit hover-lift shadow-feminine">
                 <CardHeader>
-                  <CardTitle className="flex items-center gap-2">
-                    <Activity className="h-5 w-5 text-primary" />
+                  <CardTitle className="flex items-center gap-2 bg-gradient-navy-pink bg-clip-text text-transparent">
+                    <Activity className="h-5 w-5 text-secondary" />
                     Recent Activity
                   </CardTitle>
                   <CardDescription>
@@ -233,22 +233,18 @@ const Dashboard = () => {
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.8 + index * 0.1 }}
-                        className={`flex items-start gap-4 p-4 rounded-lg border transition-all hover:shadow-md ${
-                          activity.type === 'success' ? 'bg-green-50 border-green-200' :
-                          activity.type === 'warning' ? 'bg-yellow-50 border-yellow-200' :
-                          'bg-blue-50 border-blue-200'
+                        className={`flex items-start gap-4 p-4 rounded-lg border transition-feminine hover:shadow-feminine hover-lift ${
+                          activity.type === 'success' ? 'bg-gradient-to-r from-green-50 to-accent/20 border-success/20' :
+                          activity.type === 'warning' ? 'bg-gradient-to-r from-yellow-50 to-accent/20 border-warning/20' :
+                          'bg-gradient-to-r from-blue-50 to-secondary/10 border-secondary/20'
                         }`}
                       >
                         <div className={`p-2 rounded-lg ${
-                          activity.type === 'success' ? 'bg-green-100' :
-                          activity.type === 'warning' ? 'bg-yellow-100' :
-                          'bg-blue-100'
+                          activity.type === 'success' ? 'bg-gradient-safe' :
+                          activity.type === 'warning' ? 'bg-gradient-pink-yellow' :
+                          'bg-gradient-feminine'
                         }`}>
-                          <activity.icon className={`h-4 w-4 ${
-                            activity.type === 'success' ? 'text-green-600' :
-                            activity.type === 'warning' ? 'text-yellow-600' :
-                            'text-blue-600'
-                          }`} />
+                          <activity.icon className={`h-4 w-4 text-white`} />
                         </div>
                         <div className="flex-1">
                           <p className="font-medium">{activity.title}</p>
@@ -281,21 +277,21 @@ const Dashboard = () => {
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.8 }}
             >
-              <Card className="h-fit">
+              <Card className="h-fit hover-lift shadow-feminine">
                 <CardHeader>
-                  <CardTitle className="flex items-center gap-2">
-                    <BookOpen className="h-5 w-5 text-primary" />
+                  <CardTitle className="flex items-center gap-2 bg-gradient-navy-pink bg-clip-text text-transparent">
+                    <BookOpen className="h-5 w-5 text-secondary" />
                     Today's Safety Tip
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-4">
-                    <div className="p-4 bg-gradient-to-r from-primary/10 to-blue-50 rounded-lg border">
-                      <h4 className="font-semibold mb-2">Enable Two-Factor Authentication</h4>
-                      <p className="text-sm text-muted-foreground mb-3">
+                    <div className="p-4 bg-gradient-feminine rounded-lg border border-secondary/20 shimmer">
+                      <h4 className="font-semibold mb-2 text-white">Enable Two-Factor Authentication</h4>
+                      <p className="text-sm text-white/80 mb-3">
                         Add an extra layer of security to your accounts to prevent unauthorized access.
                       </p>
-                      <Button size="sm" className="w-full">
+                      <Button size="sm" className="w-full bg-gradient-pink-yellow hover-lift">
                         Learn More
                       </Button>
                     </div>

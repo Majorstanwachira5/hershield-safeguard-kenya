@@ -2,7 +2,7 @@ import { Shield, Heart, Users, Lock, ArrowRight, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import Navigation from "@/components/Navigation";
-import HerShieldLogo from "@/components/HerShieldLogo";
+import FeminineLogo from "@/components/ui/FeminineLogo";
 import { Link } from "react-router-dom";
 import heroBackground from "@/assets/hero-background.jpg";
 
@@ -57,10 +57,10 @@ const Index = () => {
         />
         <div className="container mx-auto text-center relative z-10">
           <div className="max-w-4xl mx-auto">
-            <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-primary bg-clip-text text-transparent">
+            <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-navy-pink bg-clip-text text-transparent float">
               Your Digital Safety, 
               <br />
-              <span className="text-foreground">Our Priority</span>
+              <span className="bg-gradient-feminine bg-clip-text text-transparent">Our Priority</span>
             </h1>
             <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
               HerShield empowers women and girls in Kenya with AI-powered protection, 
@@ -68,12 +68,12 @@ const Index = () => {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link to="/dashboard">
-                <Button variant="hero" size="xl" className="w-full sm:w-auto">
+                <Button variant="hero" size="xl" className="w-full sm:w-auto bg-gradient-navy-pink hover-lift shadow-glow">
                   Start Protecting Yourself
                   <ArrowRight className="h-5 w-5" />
                 </Button>
               </Link>
-              <Button variant="soft" size="xl" className="w-full sm:w-auto">
+              <Button variant="soft" size="xl" className="w-full sm:w-auto bg-gradient-pink-yellow hover-lift">
                 Learn More
               </Button>
             </div>
@@ -94,12 +94,12 @@ const Index = () => {
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {features.map((feature, index) => (
-              <Card key={index} className="bg-card/80 border-border/50 hover:shadow-card transition-all">
+              <Card key={index} className="bg-card/80 border-border/50 hover:shadow-feminine transition-feminine hover-lift">
                 <CardHeader className="text-center">
-                  <div className="mx-auto w-12 h-12 bg-gradient-primary rounded-lg flex items-center justify-center mb-4">
-                    <feature.icon className="h-6 w-6 text-primary-foreground" />
+                  <div className="mx-auto w-12 h-12 bg-gradient-feminine rounded-lg flex items-center justify-center mb-4 pulse-glow">
+                    <feature.icon className="h-6 w-6 text-white" />
                   </div>
-                  <CardTitle className="text-lg">{feature.title}</CardTitle>
+                  <CardTitle className="text-lg bg-gradient-navy-pink bg-clip-text text-transparent">{feature.title}</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <CardDescription className="text-center">
@@ -146,18 +146,19 @@ const Index = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 px-4 bg-gradient-primary">
-        <div className="container mx-auto text-center">
+      <section className="py-20 px-4 bg-gradient-navy-pink relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-feminine opacity-20 shimmer"></div>
+        <div className="container mx-auto text-center relative z-10">
           <div className="max-w-2xl mx-auto text-primary-foreground">
-            <h2 className="text-3xl font-bold mb-4">
+            <h2 className="text-3xl font-bold mb-4 float">
               Ready to Take Control of Your Digital Safety?
             </h2>
-            <p className="text-primary-foreground/80 mb-8">
+            <p className="text-primary-foreground/90 mb-8">
               Join thousands of women who trust HerShield to protect their digital wellbeing. 
               Your safety journey starts here.
             </p>
             <Link to="/dashboard">
-              <Button variant="secondary" size="xl">
+              <Button variant="secondary" size="xl" className="bg-gradient-pink-yellow hover-lift shadow-glow text-foreground">
                 Get Started Free
                 <ArrowRight className="h-5 w-5" />
               </Button>
@@ -170,7 +171,7 @@ const Index = () => {
       <footer className="py-12 px-4 bg-background border-t border-border/40">
         <div className="container mx-auto">
           <div className="flex flex-col md:flex-row items-center justify-between">
-            <HerShieldLogo size="md" />
+            <FeminineLogo size="medium" showText={true} />
             <div className="flex flex-col md:flex-row items-center gap-4 mt-4 md:mt-0">
               <p className="text-sm text-muted-foreground">
                 © 2024 HerShield. Protecting women's digital rights.
