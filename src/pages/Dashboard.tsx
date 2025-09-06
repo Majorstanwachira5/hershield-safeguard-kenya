@@ -10,6 +10,7 @@ import QuickActions from "@/components/QuickActions";
 import SafetyTipCard from "@/components/SafetyTipCard";
 import EmergencyButton from "@/components/EmergencyButton";
 import QuickReportButton from "@/components/QuickReportButton";
+import FeminineBackground from "@/components/ui/FeminineBackground";
 import { motion } from 'framer-motion';
 
 const Dashboard = () => {
@@ -120,11 +121,12 @@ const Dashboard = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-hero">
+    <div className="min-h-screen bg-gradient-hero relative">
+      <FeminineBackground variant="subtle" />
       <Navigation showAuthButtons={false} />
 
       {/* Main Content */}
-      <main className="container mx-auto px-4 py-6">
+      <main className="container mx-auto px-4 py-6 relative z-10">
         <Breadcrumbs />
         
         <motion.div

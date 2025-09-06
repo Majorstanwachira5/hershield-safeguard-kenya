@@ -1,6 +1,7 @@
 import { Shield, Users, Phone, Settings, HelpCircle, AlertTriangle } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { useNavigate } from "react-router-dom";
 
 interface QuickAction {
   title: string;
@@ -11,69 +12,71 @@ interface QuickAction {
 }
 
 const QuickActions = () => {
+  const navigate = useNavigate();
+  
   const actions: QuickAction[] = [
     {
       title: "Privacy Dashboard",
       description: "Customize your privacy settings and data visibility",
       icon: Shield,
       variant: "hero",
-      action: () => console.log("Navigate to privacy settings")
+      action: () => navigate('/profile?tab=privacy')
     },
     {
       title: "Trusted Contacts",
       description: "Manage your emergency contacts and trusted network",
       icon: Users,
       variant: "safe",
-      action: () => console.log("Navigate to contacts")
+      action: () => navigate('/profile?tab=contacts')
     },
     {
       title: "Emergency Resources",
       description: "Quick access to emergency services and helplines",
       icon: Phone,
       variant: "report",
-      action: () => console.log("Navigate to emergency resources")
+      action: () => navigate('/resources')
     },
     {
       title: "Safety Settings",
       description: "Configure your safety preferences and alerts",
       icon: Settings,
       variant: "soft",
-      action: () => console.log("Navigate to safety settings")
+      action: () => navigate('/safety')
     },
     {
       title: "Get Help",
       description: "Access support, guides, and community resources",
       icon: HelpCircle,
       variant: "soft",
-      action: () => console.log("Navigate to help")
+      action: () => navigate('/resources?tab=help')
     },
     {
       title: "Report Issue",
       description: "Report harassment, abuse, or safety concerns",
       icon: AlertTriangle,
       variant: "report",
-      action: () => console.log("Open report dialog")
+      action: () => navigate('/report')
     }
   ];
 
   const getCardStyle = (variant: string) => {
     const styles = {
-      hero: "bg-card/50 border-primary/20 hover:shadow-card transition-all",
-      safe: "bg-card/50 border-success/20 hover:shadow-card transition-all",
-      report: "bg-card/50 border-warning/20 hover:shadow-card transition-all",
-      soft: "bg-card/50 border-accent/20 hover:shadow-card transition-all"
+      hero: "bg-gradient-to-br from-card to-secondary/10 border-secondary/30 hover:shadow-feminine transition-feminine hover-lift",
+      safe: "bg-gradient-to-br from-card to-accent/10 border-accent/30 hover:shadow-feminine transition-feminine hover-lift",
+      report: "bg-gradient-to-br from-card to-destructive/5 border-destructive/20 hover:shadow-feminine transition-feminine hover-lift",
+      soft: "bg-gradient-to-br from-card to-muted/20 border-border hover:shadow-feminine transition-feminine hover-lift"
     };
     return styles[variant as keyof typeof styles] || styles.soft;
   };
 
-  const getIconColor = (variant: string) => {
-    const colors = {
-      hero: "text-primary",
-      safe: "text-success", 
-      report: "text-warning",
-      soft: "text-accent-foreground"
+  const getIconStyle = (variant: string) => {
+    const styles = {
+      hero: "text-white bg-gradient-navy-pink p-3 rounded-lg shadow-glow",
+      safe: "text-white bg-gradient-safe p-3 rounded-lg shadow-glow",
+      report: "text-white bg-gradient-pink-yellow p-3 rounded-lg shadow-glow",
+      soft: "text-secondary bg-gradient-feminine/20 p-3 rounded-lg"
     };
-    return colors[variant as keyof typeof colors] || colors.soft;
+    return styles[variant as keyof typeof styles] || styles.soft;
   };
 
   return (
@@ -81,9 +84,11 @@ const QuickActions = () => {
       {actions.map((action, index) => (
         <Card key={index} className={getCardStyle(action.variant)}>
           <CardHeader className="text-center pb-3">
-            <action.icon className={`h-8 w-8 ${getIconColor(action.variant)} mx-auto mb-2`} />
-            <CardTitle className="text-lg">{action.title}</CardTitle>
-            <CardDescription className="text-sm">
+            <div className="flex justify-center mb-4">
+              <action.icon className={`h-8 w-8 ${getIconStyle(action.variant)}`} />
+            </div>
+            <CardTitle className="text-lg bg-gradient-navy-pink bg-clip-text text-transparent">{action.title}</CardTitle>
+            <CardDescription className="text-sm leading-relaxed">
               {action.description}
             </CardDescription>
           </CardHeader>

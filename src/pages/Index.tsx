@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import Navigation from "@/components/Navigation";
 import FeminineLogo from "@/components/ui/FeminineLogo";
+import FeminineBackground from "@/components/ui/FeminineBackground";
 import { Link } from "react-router-dom";
 import heroBackground from "@/assets/hero-background.jpg";
 
@@ -45,16 +46,21 @@ const Index = () => {
     }
   ];
 
+  const scrollToFeatures = () => {
+    const featuresSection = document.getElementById('features-section');
+    if (featuresSection) {
+      featuresSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
-    <div className="min-h-screen bg-gradient-hero">
+    <div className="min-h-screen bg-gradient-hero relative">
+      <FeminineBackground variant="hero" />
       <Navigation />
 
       {/* Hero Section */}
       <section className="relative py-20 px-4 overflow-hidden">
-        <div 
-          className="absolute inset-0 bg-cover bg-center opacity-10"
-          style={{ backgroundImage: `url(${heroBackground})` }}
-        />
+        <FeminineBackground variant="particles" className="opacity-30" />
         <div className="container mx-auto text-center relative z-10">
           <div className="max-w-4xl mx-auto">
             <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-navy-pink bg-clip-text text-transparent float">
@@ -73,7 +79,12 @@ const Index = () => {
                   <ArrowRight className="h-5 w-5" />
                 </Button>
               </Link>
-              <Button variant="soft" size="xl" className="w-full sm:w-auto bg-gradient-pink-yellow hover-lift">
+              <Button 
+                variant="soft" 
+                size="xl" 
+                className="w-full sm:w-auto bg-gradient-pink-yellow hover-lift shadow-glow"
+                onClick={scrollToFeatures}
+              >
                 Learn More
               </Button>
             </div>
@@ -82,8 +93,9 @@ const Index = () => {
       </section>
 
       {/* Features Section */}
-      <section className="py-20 px-4 bg-background/50">
-        <div className="container mx-auto">
+      <section id="features-section" className="py-20 px-4 bg-background/50 relative">
+        <FeminineBackground variant="pattern" />
+        <div className="container mx-auto relative z-10">
           <div className="text-center mb-16">
             <h2 className="text-3xl font-bold mb-4">Built for Your Safety</h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
@@ -113,8 +125,9 @@ const Index = () => {
       </section>
 
       {/* Testimonials */}
-      <section className="py-20 px-4">
-        <div className="container mx-auto">
+      <section className="py-20 px-4 relative">
+        <FeminineBackground variant="subtle" />
+        <div className="container mx-auto relative z-10">
           <div className="text-center mb-16">
             <h2 className="text-3xl font-bold mb-4">Trusted by Women Across Kenya</h2>
             <p className="text-muted-foreground">
@@ -124,19 +137,24 @@ const Index = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
             {testimonials.map((testimonial, index) => (
-              <Card key={index} className="bg-card/80">
+              <Card key={index} className="bg-gradient-to-br from-card to-card/50 border-secondary/20 hover-lift shadow-feminine">
                 <CardContent className="pt-6">
                   <div className="flex mb-4">
                     {[...Array(testimonial.rating)].map((_, i) => (
-                      <Star key={i} className="h-4 w-4 fill-primary text-primary" />
+                      <Star key={i} className="h-4 w-4 fill-secondary text-secondary animate-pulse" style={{animationDelay: `${i * 0.2}s`}} />
                     ))}
                   </div>
-                  <p className="text-muted-foreground mb-4 italic">
+                  <p className="text-muted-foreground mb-4 italic text-base leading-relaxed">
                     "{testimonial.text}"
                   </p>
-                  <div>
-                    <p className="font-semibold">{testimonial.name}</p>
-                    <p className="text-sm text-muted-foreground">{testimonial.location}</p>
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 bg-gradient-feminine rounded-full flex items-center justify-center text-white font-semibold">
+                      {testimonial.name.charAt(0)}
+                    </div>
+                    <div>
+                      <p className="font-semibold bg-gradient-navy-pink bg-clip-text text-transparent">{testimonial.name}</p>
+                      <p className="text-sm text-secondary/70">{testimonial.location}</p>
+                    </div>
                   </div>
                 </CardContent>
               </Card>
