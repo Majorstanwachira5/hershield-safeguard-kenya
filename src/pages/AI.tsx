@@ -584,7 +584,7 @@ export default function AIPage() {
                   <Badge className="bg-gradient-safe text-white">Real-time Monitoring</Badge>
                 </div>
               </div>
-            </Card>
+            </CardContent>
           </Card>
         </TabsContent>
         
