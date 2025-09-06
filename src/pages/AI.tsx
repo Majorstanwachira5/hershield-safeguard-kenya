@@ -21,6 +21,11 @@ import {
 import { AIMessageAnalyzer } from "@/components/ai/AIMessageAnalyzer";
 import { AISafetyAdvisor } from "@/components/ai/AISafetyAdvisor";
 import { AIEmergencyCenter } from "@/components/ai/AIEmergencyCenter";
+import AIMoodAnalyzer from "@/components/ai/AIMoodAnalyzer";
+import AIChatAssistant from "@/components/ai/AIChatAssistant";
+import AILearningCompanion from "@/components/ai/AILearningCompanion";
+import Navigation from "@/components/Navigation";
+import FeminineBackground from "@/components/ui/FeminineBackground";
 import { toast } from "sonner";
 
 interface AIStats {
@@ -45,8 +50,9 @@ const AI_FEATURES = [
     description: 'Advanced AI analysis of messages, emails, and content for threat detection',
     icon: MessageSquare,
     color: 'text-blue-500',
-    bgColor: 'bg-blue-50',
-    borderColor: 'border-blue-200'
+    bgColor: 'bg-gradient-to-r from-blue-50 to-indigo-50',
+    borderColor: 'border-blue-200',
+    stats: 'Analyzes 50+ threat types'
   },
   {
     id: 'safety-advisor',
@@ -54,8 +60,9 @@ const AI_FEATURES = [
     description: 'Personalized safety advice and risk assessments based on your situation',
     icon: Lightbulb,
     color: 'text-green-500',
-    bgColor: 'bg-green-50',
-    borderColor: 'border-green-200'
+    bgColor: 'bg-gradient-to-r from-green-50 to-emerald-50',
+    borderColor: 'border-green-200',
+    stats: '1000+ safety scenarios'
   },
   {
     id: 'emergency-center',
@@ -63,8 +70,49 @@ const AI_FEATURES = [
     description: 'Real-time emergency response coordination and assistance',
     icon: AlertTriangle,
     color: 'text-red-500',
-    bgColor: 'bg-red-50',
-    borderColor: 'border-red-200'
+    bgColor: 'bg-gradient-to-r from-red-50 to-orange-50',
+    borderColor: 'border-red-200',
+    stats: '24/7 Emergency Support'
+  },
+  {
+    id: 'mood-analyzer',
+    title: 'Mood Analyzer',
+    description: 'Emotional wellness AI that analyzes your feelings and provides support',
+    icon: Heart,
+    color: 'text-purple-500',
+    bgColor: 'bg-gradient-to-r from-purple-50 to-pink-50',
+    borderColor: 'border-purple-200',
+    stats: 'Emotional intelligence AI'
+  },
+  {
+    id: 'ai-chat',
+    title: 'AI Companion',
+    description: 'Your personal AI assistant for safety, support, and empowerment',
+    icon: Users,
+    color: 'text-pink-500',
+    bgColor: 'bg-gradient-to-r from-pink-50 to-rose-50',
+    borderColor: 'border-pink-200',
+    stats: '3 AI personalities available'
+  },
+  {
+    id: 'privacy-scanner',
+    title: 'Privacy Scanner',
+    description: 'Scan your digital footprint and get privacy recommendations',
+    icon: Shield,
+    color: 'text-indigo-500',
+    bgColor: 'bg-gradient-to-r from-indigo-50 to-blue-50',
+    borderColor: 'border-indigo-200',
+    stats: 'Protects your digital identity'
+  },
+  {
+    id: 'learning',
+    title: 'Learning Companion',
+    description: 'Interactive AI tutor for digital safety education and skills',
+    icon: BookOpen,
+    color: 'text-teal-500',
+    bgColor: 'bg-gradient-to-r from-teal-50 to-cyan-50',
+    borderColor: 'border-teal-200',
+    stats: 'Personalized learning paths'
   }
 ];
 
@@ -78,6 +126,7 @@ const SAMPLE_QUICK_TESTS = [
 
 export default function AIPage() {
   const [activeTab, setActiveTab] = useState('overview');
+  const [isChatOpen, setIsChatOpen] = useState(false);
   const [aiStats, setAiStats] = useState<AIStats>({
     totalAnalyses: 0,
     threatsDetected: 0,
@@ -169,49 +218,79 @@ export default function AIPage() {
   };
 
   return (
-    <div className="container mx-auto px-4 py-8 space-y-8">
-      <div className="text-center space-y-4">
-        <div className="flex items-center justify-center gap-3">
-          <div className="p-3 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full">
-            <Brain className="h-8 w-8 text-white" />
+    <div className="min-h-screen bg-gradient-hero relative">
+      <FeminineBackground variant="particles" className="opacity-20" />
+      <Navigation />
+      
+      <div className="container mx-auto px-4 py-8 space-y-8 relative z-10">
+        <div className="text-center space-y-4">
+          <div className="flex items-center justify-center gap-3">
+            <div className="p-4 bg-gradient-feminine rounded-full shadow-glow pulse-glow">
+              <Brain className="h-10 w-10 text-white" />
+            </div>
+            <h1 className="text-5xl font-bold bg-gradient-navy-pink bg-clip-text text-transparent float">AI Safety Hub</h1>
           </div>
-          <h1 className="text-4xl font-bold">AI Safety Hub</h1>
+          <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+            Experience the most advanced AI-powered safety platform designed specifically for women. 
+            From threat detection to emotional support, our AI companions are here to protect and empower you.
+          </p>
+          <div className="flex flex-wrap justify-center gap-4 mt-6">
+            <Badge className="bg-gradient-feminine text-white px-4 py-2 text-sm">
+              ✨ 7 AI-Powered Tools
+            </Badge>
+            <Badge className="bg-gradient-navy-pink text-white px-4 py-2 text-sm">
+              🛡️ Advanced Protection
+            </Badge>
+            <Badge className="bg-gradient-pink-yellow text-foreground px-4 py-2 text-sm">
+              💖 Emotional Support
+            </Badge>
+          </div>
         </div>
-        <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-          Harness the power of artificial intelligence for advanced threat detection, 
-          personalized safety advice, and emergency response coordination.
-        </p>
-      </div>
 
       <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-6">
-        <TabsList className="grid w-full grid-cols-4 lg:w-auto lg:grid-cols-4">
-          <TabsTrigger value="overview" className="flex items-center gap-2">
+        <TabsList className="flex flex-wrap lg:grid lg:grid-cols-7 bg-gradient-to-r from-background to-secondary/10 border-secondary/30">
+          <TabsTrigger value="overview" className="flex items-center gap-2 hover-lift">
             <Activity className="h-4 w-4" />
             <span className="hidden sm:inline">Overview</span>
           </TabsTrigger>
-          <TabsTrigger value="message-analyzer" className="flex items-center gap-2">
+          <TabsTrigger value="message-analyzer" className="flex items-center gap-2 hover-lift">
             <MessageSquare className="h-4 w-4" />
             <span className="hidden sm:inline">Analyzer</span>
           </TabsTrigger>
-          <TabsTrigger value="safety-advisor" className="flex items-center gap-2">
+          <TabsTrigger value="safety-advisor" className="flex items-center gap-2 hover-lift">
             <Lightbulb className="h-4 w-4" />
             <span className="hidden sm:inline">Advisor</span>
           </TabsTrigger>
-          <TabsTrigger value="emergency-center" className="flex items-center gap-2">
+          <TabsTrigger value="emergency-center" className="flex items-center gap-2 hover-lift">
             <AlertTriangle className="h-4 w-4" />
             <span className="hidden sm:inline">Emergency</span>
           </TabsTrigger>
+          <TabsTrigger value="mood-analyzer" className="flex items-center gap-2 hover-lift">
+            <Heart className="h-4 w-4" />
+            <span className="hidden sm:inline">Mood</span>
+          </TabsTrigger>
+          <TabsTrigger value="ai-chat" className="flex items-center gap-2 hover-lift">
+            <Users className="h-4 w-4" />
+            <span className="hidden sm:inline">Chat</span>
+          </TabsTrigger>
+          <TabsTrigger value="learning" className="flex items-center gap-2 hover-lift">
+            <BookOpen className="h-4 w-4" />
+            <span className="hidden sm:inline">Learn</span>
+          </TabsTrigger>
         </TabsList>
 
-        <TabsContent value="overview" className="space-y-6">
+        <TabsContent value="overview" className="space-y-8">
+          {/* Hero Stats */}
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-            <Card>
+            <Card className="hover-lift shadow-feminine bg-gradient-to-br from-card to-secondary/5">
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium">Total Analyses</CardTitle>
-                <Brain className="h-4 w-4 text-muted-foreground" />
+                <CardTitle className="text-sm font-medium bg-gradient-navy-pink bg-clip-text text-transparent">Total Analyses</CardTitle>
+                <div className="p-2 bg-gradient-feminine rounded-lg">
+                  <Brain className="h-4 w-4 text-white" />
+                </div>
               </CardHeader>
               <CardContent>
-                <div className="text-2xl font-bold">{aiStats.totalAnalyses.toLocaleString()}</div>
+                <div className="text-3xl font-bold">{aiStats.totalAnalyses.toLocaleString()}</div>
                 <p className="text-xs text-muted-foreground">
                   AI-powered content scans
                 </p>
@@ -275,20 +354,24 @@ export default function AIPage() {
                   return (
                     <div
                       key={feature.id}
-                      className={`p-4 rounded-lg border ${feature.bgColor} ${feature.borderColor} cursor-pointer hover:shadow-md transition-all`}
+                      className={`p-4 rounded-lg border ${feature.bgColor} ${feature.borderColor} cursor-pointer hover:shadow-feminine transition-feminine hover-lift`}
                       onClick={() => setActiveTab(feature.id)}
                     >
                       <div className="flex items-start gap-3">
-                        <div className={`p-2 rounded-lg bg-white ${feature.borderColor} border`}>
-                          <Icon className={`h-5 w-5 ${feature.color}`} />
+                        <div className={`p-3 rounded-lg bg-gradient-feminine shadow-glow`}>
+                          <Icon className={`h-5 w-5 text-white`} />
                         </div>
                         <div className="flex-1">
-                          <h3 className="font-medium">{feature.title}</h3>
+                          <h3 className="font-medium bg-gradient-navy-pink bg-clip-text text-transparent">{feature.title}</h3>
                           <p className="text-sm text-muted-foreground mt-1">
                             {feature.description}
                           </p>
+                          <Badge variant="outline" className="mt-2 text-xs">
+                            {feature.stats}
+                          </Badge>
+                          <br />
                           <Button
-                            variant="outline"
+                            variant="feminine"
                             size="sm"
                             className="mt-2"
                             onClick={(e) => {
@@ -416,7 +499,110 @@ export default function AIPage() {
         <TabsContent value="emergency-center">
           <AIEmergencyCenter />
         </TabsContent>
+        
+        <TabsContent value="mood-analyzer">
+          <AIMoodAnalyzer onAnalysisComplete={(analysis) => {
+            console.log('Mood analysis completed:', analysis);
+            if (analysis.overall < 40) {
+              toast.error('Low mood detected - consider reaching out for support', {
+                description: 'Your emotional wellbeing is important. Consider speaking with someone you trust.'
+              });
+            }
+          }} />
+        </TabsContent>
+        
+        <TabsContent value="ai-chat">
+          <div className="space-y-6">
+            <Card className="hover-lift shadow-feminine">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2 bg-gradient-navy-pink bg-clip-text text-transparent">
+                  <Users className="h-5 w-5 text-secondary" />
+                  AI Companion Chat
+                </CardTitle>
+                <CardDescription>
+                  Meet your AI companions - Amara, Safira, and Wendo. Each has a unique personality to support you!
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="flex justify-center">
+                  <Button
+                    onClick={() => setIsChatOpen(true)}
+                    className="bg-gradient-feminine hover-lift shadow-glow"
+                  >
+                    <MessageSquare className="h-4 w-4 mr-2" />
+                    Open AI Chat
+                  </Button>
+                </div>
+                
+                <div className="grid gap-4 mt-6 md:grid-cols-3">
+                  {[
+                    { name: 'Amara', emoji: '✨', desc: 'Your empowering AI sister', color: 'from-pink-500 to-purple-500' },
+                    { name: 'Safira', emoji: '🛡️', desc: 'Your protective AI guardian', color: 'from-blue-500 to-indigo-500' },
+                    { name: 'Wendo', emoji: '🌸', desc: 'Your caring AI friend', color: 'from-green-400 to-teal-500' }
+                  ].map((ai, index) => (
+                    <Card key={index} className={`text-center p-4 bg-gradient-to-r ${ai.color} text-white hover-lift`}>
+                      <div className="text-3xl mb-2">{ai.emoji}</div>
+                      <h3 className="font-bold">{ai.name}</h3>
+                      <p className="text-sm opacity-90">{ai.desc}</p>
+                    </Card>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+            
+            <AIChatAssistant 
+              isMinimized={!isChatOpen}
+              onToggle={() => setIsChatOpen(!isChatOpen)}
+              position="center"
+            />
+          </div>
+        </TabsContent>
+        
+        <TabsContent value="privacy-scanner">
+          <Card className="hover-lift shadow-feminine">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2 bg-gradient-navy-pink bg-clip-text text-transparent">
+                <Shield className="h-5 w-5 text-secondary" />
+                Privacy Scanner (Coming Soon)
+              </CardTitle>
+              <CardDescription>
+                Advanced privacy analysis and recommendations for your digital safety
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div className="text-center p-8 bg-gradient-to-r from-secondary/5 to-accent/5 rounded-lg border border-secondary/20">
+                <Sparkles className="h-12 w-12 mx-auto mb-4 text-secondary" />
+                <h3 className="text-lg font-semibold mb-2">Amazing Privacy Features Coming Soon!</h3>
+                <p className="text-muted-foreground mb-4">
+                  Our AI will soon scan your digital footprint, analyze privacy settings across platforms, 
+                  and provide personalized recommendations to keep you safe online.
+                </p>
+                <div className="grid gap-2 sm:grid-cols-2">
+                  <Badge className="bg-gradient-feminine text-white">Social Media Scan</Badge>
+                  <Badge className="bg-gradient-navy-pink text-white">Privacy Score</Badge>
+                  <Badge className="bg-gradient-pink-yellow text-foreground">Smart Recommendations</Badge>
+                  <Badge className="bg-gradient-safe text-white">Real-time Monitoring</Badge>
+                </div>
+              </div>
+            </Card>
+          </Card>
+        </TabsContent>
+        
+        <TabsContent value="learning">
+          <AILearningCompanion onLessonComplete={(lessonId, score) => {
+            console.log(`Lesson ${lessonId} completed with score:`, score);
+            toast.success(`Lesson completed! Score: ${score}%`, {
+              description: 'Great job on your learning journey! Keep up the amazing work.'
+            });
+            
+            // Update AI stats
+            updateAiStats({
+              safetyAdvicesGenerated: aiStats.safetyAdvicesGenerated + 1
+            });
+          }} />
+        </TabsContent>
       </Tabs>
+      </div>
     </div>
   );
 }

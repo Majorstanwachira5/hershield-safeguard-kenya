@@ -11,6 +11,7 @@ import SafetyTipCard from "@/components/SafetyTipCard";
 import EmergencyButton from "@/components/EmergencyButton";
 import QuickReportButton from "@/components/QuickReportButton";
 import FeminineBackground from "@/components/ui/FeminineBackground";
+import AIChatAssistant from "@/components/ai/AIChatAssistant";
 import { motion } from 'framer-motion';
 
 const Dashboard = () => {
@@ -18,6 +19,7 @@ const Dashboard = () => {
   const [activeThreats, setActiveThreats] = useState(3);
   const [reportsHandled, setReportsHandled] = useState(127);
   const [communitySize, setCommunitySize] = useState(2847);
+  const [isChatOpen, setIsChatOpen] = useState(false);
 
   // Animate safety score on mount
   useEffect(() => {
@@ -289,13 +291,23 @@ const Dashboard = () => {
                 <CardContent>
                   <div className="space-y-4">
                     <div className="p-4 bg-gradient-feminine rounded-lg border border-secondary/20 shimmer">
-                      <h4 className="font-semibold mb-2 text-white">Enable Two-Factor Authentication</h4>
+                      <h4 className="font-semibold mb-2 text-white">✨ AI Safety Tip</h4>
                       <p className="text-sm text-white/80 mb-3">
-                        Add an extra layer of security to your accounts to prevent unauthorized access.
+                        Enable Two-Factor Authentication on all your important accounts. This AI-recommended security measure reduces account compromise risk by 99.9%!
                       </p>
-                      <Button size="sm" className="w-full bg-gradient-pink-yellow hover-lift">
-                        Learn More
-                      </Button>
+                      <div className="flex gap-2">
+                        <Button size="sm" className="flex-1 bg-gradient-pink-yellow hover-lift">
+                          Learn More
+                        </Button>
+                        <Button 
+                          size="sm" 
+                          variant="outline"
+                          className="border-white/30 text-white hover:bg-white/10"
+                          onClick={() => setIsChatOpen(true)}
+                        >
+                          Ask AI
+                        </Button>
+                      </div>
                     </div>
                     <div className="text-center">
                       <Button variant="outline" size="sm">
@@ -313,6 +325,13 @@ const Dashboard = () => {
       {/* Fixed Action Buttons */}
       <EmergencyButton />
       <QuickReportButton />
+      
+      {/* AI Chat Assistant */}
+      <AIChatAssistant 
+        isMinimized={!isChatOpen}
+        onToggle={() => setIsChatOpen(!isChatOpen)}
+        position="bottom-left"
+      />
     </div>
   );
 };

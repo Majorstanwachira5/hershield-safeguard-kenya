@@ -5,6 +5,7 @@ import Navigation from "@/components/Navigation";
 import FeminineLogo from "@/components/ui/FeminineLogo";
 import FeminineBackground from "@/components/ui/FeminineBackground";
 import { Link } from "react-router-dom";
+import { useState } from "react";
 import heroBackground from "@/assets/hero-background.jpg";
 
 const Index = () => {
@@ -46,11 +47,17 @@ const Index = () => {
     }
   ];
 
+  const [isChatOpen, setIsChatOpen] = useState(false);
+  
   const scrollToFeatures = () => {
     const featuresSection = document.getElementById('features-section');
     if (featuresSection) {
       featuresSection.scrollIntoView({ behavior: 'smooth' });
     }
+  };
+  
+  const toggleChat = () => {
+    setIsChatOpen(!isChatOpen);
   };
 
   return (
@@ -203,6 +210,13 @@ const Index = () => {
           </div>
         </div>
       </footer>
+      
+      {/* AI Chat Assistant */}
+      <AIChatAssistant 
+        isMinimized={!isChatOpen}
+        onToggle={toggleChat}
+        position="bottom-right"
+      />
     </div>
   );
 };
